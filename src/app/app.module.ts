@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {DropZoneComponent} from "./drop-zone/drop-zone.component";
-import {TaskService} from "./task.service";
+import {TaskService} from "./services/task.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import {TaskService} from "./task.service";
     HttpModule
   ],
   providers: [
-    TaskService
+    TaskService,
   ],
   bootstrap: [AppComponent]
 })

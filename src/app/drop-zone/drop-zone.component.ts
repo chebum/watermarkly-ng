@@ -6,7 +6,7 @@ import {
   transition,
   animate
 } from '@angular/core';
-import {TaskService} from "../task.service";
+import {TaskService} from "../services/task.service";
 
 @Component({
   selector: 'drop-zone',
@@ -44,7 +44,7 @@ export class DropZoneComponent {
   onDrop(e: DragEvent) {
     e.preventDefault();
     this.state = 'normal';
-    this.task.addPictures(e.dataTransfer.files);
+    this.task.addImages(e.dataTransfer.files);
   }
 
   onDragLeave(e: Event) {

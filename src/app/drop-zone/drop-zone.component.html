@@ -1,4 +1,13 @@
 <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" [@state]="state"
-     (dragenter)="onDragEnter($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (dragleave)="onDragLeave($event)">
-  Drop your images here
+     (dragenter)="onDragEnter($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)"
+     (dragleave)="onDragLeave($event)">
+  <div *ngIf="task.files.length === 0">
+    Drop your images here
+  </div>
+  <div *ngIf="task.files.length > 0">
+    <div *ngFor="let preview of task.previews">
+      <!--suppress HtmlUnknownTarget -->
+      <img src="{{preview}}">
+    </div>
+  </div>
 </div>
