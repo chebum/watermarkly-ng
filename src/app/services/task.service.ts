@@ -8,9 +8,9 @@ export function isFileSupported(file: File) {
 export function loadImage(file: File): Promise<HTMLImageElement> {
   return new Promise<HTMLImageElement>((resolve) => {
     const img = document.createElement('img'),
-      reader  = new FileReader();
+      reader = new FileReader();
 
-    reader.onloadend = function () {
+    reader.onloadend = function() {
       img.src = reader.result;
       resolve(img);
     };
@@ -55,11 +55,19 @@ export function imagePreview(file: File): Promise<string> {
 @Injectable()
 export class TaskService {
   files: File[];
-  previews: string[];
+  // previews: string[];
 
   constructor() {
     this.files = [];
-    this.previews = [];
+    // this.previews = [];
+  }
+
+  //noinspection JSUnusedGlobalSymbols
+  get imageCount() { return this.files.length; }
+
+  //noinspection JSUnusedGlobalSymbols
+  clear() {
+    this.files.splice(0);
   }
 
   addImages(files: FileList) {
@@ -67,14 +75,14 @@ export class TaskService {
       const file = files.item(i);
       if(isFileSupported(file)) {
         this.files.push(file);
-        this.previews.push("");
-        imagePreview(file)
-          .then(preview => {
-            let index = this.files.indexOf(file);
-            if(index >= 0) {
-              this.previews[index] = preview;
-            }
-          });
+        // this.previews.push("");
+        // imagePreview(file)
+        //   .then(preview => {
+        //     let index = this.files.indexOf(file);
+        //     if(index >= 0) {
+        //       this.previews[index] = preview;
+        //     }
+        //   });
       }
     }
   }

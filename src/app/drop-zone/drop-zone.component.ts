@@ -6,6 +6,7 @@ import {
   transition,
   animate
 } from '@angular/core';
+import { Location }                 from '@angular/common';
 import {TaskService} from "../services/task.service";
 
 @Component({
@@ -17,7 +18,7 @@ import {TaskService} from "../services/task.service";
       state('normal', style({
         backgroundColor: '#fff'
       })),
-      state('hot',   style({
+      state('hot', style({
         backgroundColor: '#dcce3e'
       })),
       transition('normal => hot', animate('100ms ease-in')),
@@ -28,7 +29,7 @@ import {TaskService} from "../services/task.service";
 export class DropZoneComponent {
   state = 'normal';
 
-  constructor(private task: TaskService) {
+  constructor(private task: TaskService, private location: Location) {
 
   }
 
@@ -45,6 +46,7 @@ export class DropZoneComponent {
     e.preventDefault();
     this.state = 'normal';
     this.task.addImages(e.dataTransfer.files);
+    this.location.go('editor');
   }
 
   onDragLeave(e: Event) {
