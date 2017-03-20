@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component} from "@angular/core";
 import {TaskService} from "./services/task.service";
-import {Location} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,7 @@ import {Location} from "@angular/common";
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  //noinspection JSUnusedLocalSymbols
-  constructor(private task: TaskService, private location: Location) {
+  constructor(private task: TaskService, private router: Router) {
 
   }
 }

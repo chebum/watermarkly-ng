@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {reject} from "../utils";
 
 export function isFileSupported(file: File) {
   return file.name.endsWith('.jpeg') || file.name.endsWith('.jpg') || file.name.endsWith('.png')
@@ -22,9 +23,12 @@ export function loadImage(file: File): Promise<HTMLImageElement> {
 export function resizeImage(img: HTMLImageElement, width: number, height: number): Promise<string> {
   return new Promise<string>((resolve) => {
     function onLoaded() {
-
       let imgWidth = width, imgHeight = img.height * width / img.width;
-      if(imgHeight > height) {
+
+      if(img.width < width && img.height < height) {
+        imgWidth = img.width;
+        imgHeight = img.height;
+      } else if(imgHeight > height) {
         imgHeight = height;
         imgWidth = img.width * height / img.height;
       }
@@ -85,5 +89,12 @@ export class TaskService {
         //   });
       }
     }
+  }
+
+  firstImagePreview(width: number, height: number) {
+    if(!this.files.length)
+      return reject('Files not selected');
+    return loadImage(this.files[0])
+      .then(img => resizeImage(img, width, height));
   }
 }

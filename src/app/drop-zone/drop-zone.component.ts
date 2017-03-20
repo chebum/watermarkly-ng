@@ -6,8 +6,8 @@ import {
   transition,
   animate
 } from '@angular/core';
-import { Location }                 from '@angular/common';
 import {TaskService} from "../services/task.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'drop-zone',
@@ -29,7 +29,7 @@ import {TaskService} from "../services/task.service";
 export class DropZoneComponent {
   state = 'normal';
 
-  constructor(private task: TaskService, private location: Location) {
+  constructor(private task: TaskService, private router: Router) {
 
   }
 
@@ -46,7 +46,7 @@ export class DropZoneComponent {
     e.preventDefault();
     this.state = 'normal';
     this.task.addImages(e.dataTransfer.files);
-    this.location.go('editor');
+    this.router.navigate(['/editor']);
   }
 
   onDragLeave(e: Event) {

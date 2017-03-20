@@ -1,6 +1,6 @@
 <nav>
   <span>images selected {{task.imageCount}}</span>
-  <button (click)="task.clear(); location.go('images')" *ngIf="task.imageCount > 0">Clear</button>
+  <button (click)="task.clear(); router.navigate(['images'])" *ngIf="task.imageCount > 0">Clear</button>
 </nav>
 <content>
   <router-outlet></router-outlet>
