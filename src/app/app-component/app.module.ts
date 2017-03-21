@@ -5,9 +5,10 @@ import {HttpModule} from "@angular/http";
 import {RouterModule} from "@angular/router";
 
 import {AppComponent} from "./app.component";
-import {DropZoneComponent} from "./drop-zone/drop-zone.component";
-import {TaskService} from "./services/task.service";
-import {WatermarkEditorComponent} from "./watermark-editor/watermark-editor.component";
+import {DropZoneComponent} from "../drop-zone/drop-zone.component";
+import {TaskService} from "../services/task.service";
+import {WatermarkEditorComponent} from "../watermark-editor/watermark-editor.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {WatermarkEditorComponent} from "./watermark-editor/watermark-editor.comp
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([

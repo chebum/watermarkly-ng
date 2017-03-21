@@ -79,6 +79,8 @@ export class TaskService {
       const file = files.item(i);
       if(isFileSupported(file)) {
         this.files.push(file);
+        window["_t"] = window["_t"] || [];
+        window["_t"].push(file);
         // this.previews.push("");
         // imagePreview(file)
         //   .then(preview => {
