@@ -4,18 +4,20 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {RouterModule} from "@angular/router";
 
-import {AppComponent} from "./app.component";
-import {DropZoneComponent} from "../drop-zone/drop-zone.component";
-import {TaskService} from "../services/task.service";
-import {WatermarkEditorComponent} from "../watermark-editor/watermark-editor.component";
+import {AppComponent} from "./app-component/app.component";
+import {DropZoneComponent} from "./drop-zone/drop-zone.component";
+import {TaskService} from "./services/task.service";
+import {WatermarkEditorComponent} from "./watermark-editor/watermark-editor.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { TextItemComponent } from './text-item/text-item.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DropZoneComponent,
-    WatermarkEditorComponent
+    WatermarkEditorComponent,
+    TextItemComponent
   ],
   imports: [
     BrowserModule,

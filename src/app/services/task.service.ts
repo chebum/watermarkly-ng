@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {reject} from "../utils";
+import { environment } from '../../environments/environment';
 
 export function isFileSupported(file: File) {
   return file.name.endsWith('.jpeg') || file.name.endsWith('.jpg') || file.name.endsWith('.png')
@@ -8,15 +9,20 @@ export function isFileSupported(file: File) {
 
 export function loadImage(file: File): Promise<HTMLImageElement> {
   return new Promise<HTMLImageElement>((resolve) => {
-    const img = document.createElement('img'),
-      reader = new FileReader();
+    const img = document.createElement('img');
 
-    reader.onloadend = function() {
-      img.src = reader.result;
+    if(img.complete)
       resolve(img);
-    };
+    else
+      img.addEventListener("load", () => resolve(img));
 
-    reader.readAsDataURL(file);
+    if(file["url"]) {
+      img.src = file["url"];
+    } else {
+      const reader = new FileReader();
+      reader.onloadend = () => img.src = reader.result;
+      reader.readAsDataURL(file);
+    }
   });
 }
 
@@ -64,6 +70,9 @@ export class TaskService {
   constructor() {
     this.files = [];
     // this.previews = [];
+    if (!environment.production) {
+      this.files.push(<any>{url: '/assets/debug.jpg'});
+    }
   }
 
   //noinspection JSUnusedGlobalSymbols
@@ -79,8 +88,6 @@ export class TaskService {
       const file = files.item(i);
       if(isFileSupported(file)) {
         this.files.push(file);
-        window["_t"] = window["_t"] || [];
-        window["_t"].push(file);
         // this.previews.push("");
         // imagePreview(file)
         //   .then(preview => {
@@ -93,10 +100,18 @@ export class TaskService {
     }
   }
 
-  firstImagePreview(width: number, height: number) {
+  firstImagePreview(width: number, height: number): Promise<string> {
     if(!this.files.length)
       return reject('Files not selected');
     return loadImage(this.files[0])
       .then(img => resizeImage(img, width, height));
   }
+}
+
+export class TextItem {
+  x: number;
+  y: number;
+  scale: number;
+
+  text: string;
 }
